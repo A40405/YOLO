@@ -1,0 +1,34 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+*.pyd
+*.pyo
+.pytest_cache/
+.coverage
+htmlcov/
+build/
+dist/
+wheels/
+*.egg-info/
+
+# Virtual environments
+.venv/
+
+# Project outputs
+outputs/
+runs/
+logs/
+coverage.xml
+
+# Local benchmark and dataset cache artifacts
+*.cache
+
+# Large model binaries
+models/*.pt
+models/*.onnx
+models/*.engine
+!models/.gitkeep
+
+# Editors and OS files
+.DS_Store
+Thumbs.db

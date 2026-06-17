@@ -1,0 +1,12 @@
+model: models/yolo11n.pt
+epochs: 10
+imgsz: 640
+batch: 16
+project: ../runs/train
+name: yolo11n-custom
+device: 0
+workers: 2
+patience: 20
+pretrained: true
+exist_ok: true
+verbose: true

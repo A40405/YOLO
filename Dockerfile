@@ -19,7 +19,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY --from=uv /uv /usr/local/bin/uv
 
 COPY pyproject.toml uv.lock ./
-RUN uv sync --frozen --no-dev --python 3.11
+RUN python -m venv /app/.venv \
+    && uv export --no-dev --no-sources --format requirements.txt --output-file requirements.txt \
+    && uv pip sync --python /app/.venv/bin/python --torch-backend cpu requirements.txt
 
 COPY src ./src
 

@@ -7,6 +7,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      PYTHON_VERSION: "3.11"
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -14,30 +16,19 @@ jobs:
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Set up uv
         uses: astral-sh/setup-uv@v6
 
-      - name: Create WSL-style workspace path
-        run: |
-          sudo mkdir -p /mnt/e
-          sudo ln -sfn "$GITHUB_WORKSPACE" /mnt/e/YOLO
-
       - name: Sync dependencies
-        working-directory: /mnt/e/YOLO
-        run: uv sync --python 3.11
-
-      - name: Prepare YOLO test assets
-        working-directory: /mnt/e/YOLO
-        run: uv run --python 3.11 python src/scripts/check_yolo.py
+        run: uv sync --python ${{ env.PYTHON_VERSION }}
 
       - name: Run tests with coverage
-        working-directory: /mnt/e/YOLO
-        run: uv run --python 3.11 python -m pytest --cov=src --cov-report=term-missing --cov-report=xml
+        run: uv run --python ${{ env.PYTHON_VERSION }} python -m pytest --cov=src --cov-report=term-missing --cov-report=xml
 
       - name: Upload coverage artifact
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
-          path: /mnt/e/YOLO/coverage.xml
+          path: coverage.xml

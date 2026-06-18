@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import httpx
 import pytest
 
@@ -47,26 +49,27 @@ async def test_health_endpoint_returns_ok() -> None:
     }
 
 
-async def test_predict_endpoint_returns_predictions() -> None:
+async def test_predict_endpoint_returns_predictions(sample_image_path: Path, yolo_model_source: str) -> None:
     """Ensure the predict endpoint returns validated prediction output."""
     app = create_app()
     fake_service = FakeInferenceService()
+    image_path = str(sample_image_path)
     app.dependency_overrides[get_inference_service] = lambda: fake_service
     transport = httpx.ASGITransport(app=app)
     async with httpx.AsyncClient(transport=transport, base_url="http://testserver") as client:
         response = await client.post(
             "/api/v1/predict",
             json={
-                "image_path": "/mnt/e/YOLO/outputs/sprint1_check_image.jpg",
-                "model_source": "/mnt/e/YOLO/models/yolo11n.pt",
+                "image_path": image_path,
+                "model_source": yolo_model_source,
             },
         )
 
     assert response.status_code == 200
     assert response.json() == {
         "success": True,
-        "image_path": "/mnt/e/YOLO/outputs/sprint1_check_image.jpg",
-        "model_source": "/mnt/e/YOLO/models/yolo11n.pt",
+        "image_path": image_path,
+        "model_source": yolo_model_source,
         "predictions": [
             {
                 "class": "person",
@@ -75,12 +78,10 @@ async def test_predict_endpoint_returns_predictions() -> None:
             }
         ],
     }
-    assert fake_service.calls == [
-        ("/mnt/e/YOLO/outputs/sprint1_check_image.jpg", "/mnt/e/YOLO/models/yolo11n.pt")
-    ]
+    assert fake_service.calls == [(image_path, yolo_model_source)]
 
 
-async def test_predict_endpoint_returns_structured_file_not_found_error() -> None:
+async def test_predict_endpoint_returns_structured_file_not_found_error(yolo_model_source: str) -> None:
     """Ensure missing file errors are converted into structured 404 responses."""
     app = create_app()
     app.dependency_overrides[get_inference_service] = lambda: FakeInferenceService(
@@ -92,7 +93,7 @@ async def test_predict_endpoint_returns_structured_file_not_found_error() -> Non
             "/api/v1/predict",
             json={
                 "image_path": "/missing.jpg",
-                "model_source": "/mnt/e/YOLO/models/yolo11n.pt",
+                "model_source": yolo_model_source,
             },
         )
 

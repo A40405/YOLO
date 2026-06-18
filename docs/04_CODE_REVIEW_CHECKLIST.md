@@ -7,7 +7,7 @@ Before marking a sprint complete, verify every item below.
 ## Environment Validation
 
 - [ ] All validation ran from WSL2 Ubuntu
-- [ ] Working directory was `/mnt/e/YOLO`
+- [ ] Working directory was the repository root
 - [ ] Python 3.11 was used
 - [ ] `uv` was used where required
 - [ ] No validation used Windows Python

@@ -12,13 +12,13 @@ This document describes how to deploy YOLO Platform `1.0.0` in the supported env
 Repository root:
 
 ```bash
-/mnt/e/YOLO
+<repo-root>
 ```
 
 ## WSL2 Setup
 
 1. Install WSL2 with an Ubuntu distribution.
-2. Ensure the repository is available at `/mnt/e/YOLO`.
+2. Ensure the repository is available locally and open a shell at the repository root.
 3. Confirm the shell runs inside Ubuntu WSL2, not PowerShell or CMD.
 
 ## Python Setup
@@ -26,7 +26,7 @@ Repository root:
 Use Python `3.11` only.
 
 ```bash
-cd /mnt/e/YOLO
+cd <repo-root>
 uv python list
 uv sync --python 3.11
 ```
@@ -36,7 +36,7 @@ uv sync --python 3.11
 Install `uv` in WSL2 Ubuntu, then sync the repository:
 
 ```bash
-cd /mnt/e/YOLO
+cd <repo-root>
 uv sync --python 3.11
 ```
 
@@ -57,7 +57,7 @@ docker compose version
 3. Confirm CUDA visibility from the project environment:
 
 ```bash
-cd /mnt/e/YOLO
+cd <repo-root>
 uv run --python 3.11 python src/scripts/check_gpu.py
 ```
 
@@ -66,7 +66,7 @@ uv run --python 3.11 python src/scripts/check_gpu.py
 Run the API directly from WSL2 Ubuntu:
 
 ```bash
-cd /mnt/e/YOLO
+cd <repo-root>
 uv run --python 3.11 uvicorn src.api.app:app --host 0.0.0.0 --port 8000
 ```
 
@@ -81,21 +81,21 @@ curl http://127.0.0.1:8000/api/v1/health
 Build the image:
 
 ```bash
-cd /mnt/e/YOLO
+cd <repo-root>
 docker build -t yolo-platform-api:1.0.0 .
 ```
 
 Run with Docker Compose:
 
 ```bash
-cd /mnt/e/YOLO
+cd <repo-root>
 docker compose up --build api
 ```
 
 Run GPU profile:
 
 ```bash
-cd /mnt/e/YOLO
+cd <repo-root>
 docker compose --profile gpu up --build api-gpu
 ```
 
@@ -108,7 +108,7 @@ docker compose --profile gpu up --build api-gpu
 
 ### Model path errors
 
-- Confirm models exist under `/mnt/e/YOLO/models`.
+- Confirm models exist under `<repo-root>/models`.
 - Confirm mounted Docker volumes expose `/app/models`.
 
 ### API startup validation fails

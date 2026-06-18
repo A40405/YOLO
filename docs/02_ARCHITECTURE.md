@@ -19,7 +19,7 @@ If this document conflicts with the master spec, the master spec wins.
 All architecture work assumes:
 
 - WSL2 Ubuntu only
-- Repository root `/mnt/e/YOLO`
+- Repository root
 - Python `3.11`
 - `uv`
 

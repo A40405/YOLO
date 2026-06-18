@@ -7,7 +7,7 @@
 - `docs/01_MASTER_SPEC.md` is the single source of truth.
 - Complete one sprint at a time.
 - Do not start the next sprint until approved.
-- All commands and validation must run from WSL2 Ubuntu at `/mnt/e/YOLO`.
+- All commands and validation must run from WSL2 Ubuntu at the repository root.
 - Use Python `3.11` and `uv`.
 - Never use Windows Python, PowerShell, or CMD.
 - Every sprint must have validation steps.
@@ -67,7 +67,7 @@ uv run python -c "print('ok')"
 Validation assumptions:
 
 - WSL2 Ubuntu
-- Repository root `/mnt/e/YOLO`
+- Repository root
 - Python `3.11`
 - `uv`
 
@@ -288,3 +288,31 @@ Production readiness.
 ### Validation
 
 - Required resilience scenarios are verified
+
+## Sprint 13 - Documentation & Developer Experience
+
+### Goal
+
+Finalize developer and user documentation required for release readiness.
+
+### Tasks
+
+- Update `README.md`
+- Create `docs/USER_GUIDE.md`
+- Create `docs/API_REFERENCE.md`
+- Create `docs/DATASET_GUIDE.md`
+- Ensure documentation reflects actual implemented workflows
+- Ensure a new developer can onboard using documentation only
+
+### Deliverables
+
+- `README.md`
+- `docs/USER_GUIDE.md`
+- `docs/API_REFERENCE.md`
+- `docs/DATASET_GUIDE.md`
+
+### Validation
+
+- Documentation covers setup, inference, training, evaluation, API usage, Docker usage, and dataset preparation
+- Documentation is aligned with the implemented platform behavior
+- Release `1.0.0` is blocked until all Sprint 13 deliverables are present and complete

@@ -24,7 +24,7 @@ The platform roadmap includes:
 The only supported development and validation environment is:
 
 - WSL2 Ubuntu
-- Repository root: `/mnt/e/YOLO`
+- Repository root: the checked-out project root
 - Python `3.11`
 - `uv` package manager
 - NVIDIA GPU when a sprint requires GPU validation
@@ -32,7 +32,7 @@ The only supported development and validation environment is:
 Mandatory rules:
 
 - All commands must be executed from WSL2 Ubuntu.
-- Always run commands from `/mnt/e/YOLO`.
+- Always run commands from the repository root.
 - Never use Windows Python.
 - Never use PowerShell.
 - Never use CMD.
@@ -45,7 +45,7 @@ Unless a sprint explicitly states otherwise, all validation commands assume:
 - Ubuntu WSL2
 - Python `3.11`
 - `uv`
-- Repository root `/mnt/e/YOLO`
+- Repository root
 
 Validation must be performed in the active sprint only.
 
@@ -57,6 +57,7 @@ IMPORTANT:
 - Never implement future sprints.
 - This file is the single source of truth.
 - If another document conflicts with this file, this file wins.
+- Release `1.0.0` is not complete until Sprint 13 documentation requirements are fully satisfied.
 
 After each sprint:
 
@@ -166,7 +167,7 @@ package = false
 
 ### Acceptance Criteria
 
-Must pass from WSL2 Ubuntu at `/mnt/e/YOLO`:
+Must pass from WSL2 Ubuntu at the repository root:
 
 ```bash
 uv sync
@@ -351,5 +352,93 @@ Application must survive:
 - missing models
 - GPU unavailable
 - invalid configs
+
+STOP and wait for approval.
+
+## Sprint 13 - Documentation & Developer Experience
+
+### Goal
+
+Create production-quality documentation that makes the platform understandable, usable, and maintainable for new developers and end users before release.
+
+### Deliverables
+
+Repository documentation:
+
+- README.md
+- docs/USER_GUIDE.md
+- docs/API_REFERENCE.md
+- docs/DATASET_GUIDE.md
+
+### README Requirements
+
+README must explain:
+
+- project purpose
+- key features
+- architecture overview
+- repository structure
+- installation
+- quick start
+- image inference
+- video inference
+- webcam inference
+- training workflow
+- evaluation workflow
+- API usage
+- Docker usage
+- testing
+- benchmarking
+
+README must be understandable by a new developer without reading source code.
+
+### USER_GUIDE Requirements
+
+Must explain:
+
+- how to run the platform
+- how to train a model
+- how to evaluate a model
+- how to run API inference
+- how to run Docker deployment
+
+### API_REFERENCE Requirements
+
+Must document:
+
+- endpoints
+- request schemas
+- response schemas
+- example requests
+- example responses
+
+### DATASET_GUIDE Requirements
+
+Must document:
+
+- dataset structure
+- YOLO label format
+- train/val/test organization
+- configuration examples
+
+### Release Gate
+
+Release `1.0.0` cannot be considered complete unless:
+
+- all Sprint 13 deliverables exist in the repository
+- the documentation matches the implemented platform behavior
+- the documentation is sufficient for developer onboarding and basic user operation
+
+### Acceptance Criteria
+
+A new developer must be able to:
+
+- understand the platform purpose
+- run inference
+- train a model
+- call the API
+- prepare a dataset in the expected format
+
+using documentation only.
 
 STOP and wait for approval.

@@ -1,7 +1,7 @@
 # Python Style Guide
 
 - Python `3.11` only
-- All commands must run from WSL2 Ubuntu at `/mnt/e/YOLO`
+- All commands must run from WSL2 Ubuntu at the repository root
 - Never use Windows Python, PowerShell, or CMD
 - Full type hints on all public APIs
 - Google-style docstrings

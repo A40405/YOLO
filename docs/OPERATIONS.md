@@ -5,7 +5,7 @@
 Direct runtime:
 
 ```bash
-cd /mnt/e/YOLO
+cd <repo-root>
 uv sync --python 3.11
 uv run --python 3.11 uvicorn src.api.app:app --host 0.0.0.0 --port 8000
 ```
@@ -13,7 +13,7 @@ uv run --python 3.11 uvicorn src.api.app:app --host 0.0.0.0 --port 8000
 Container runtime:
 
 ```bash
-cd /mnt/e/YOLO
+cd <repo-root>
 docker compose up --build api
 ```
 
@@ -26,18 +26,18 @@ Direct runtime:
 Container runtime:
 
 ```bash
-cd /mnt/e/YOLO
+cd <repo-root>
 docker compose down
 ```
 
 ## Model Update Procedure
 
-1. Copy the new model file into `/mnt/e/YOLO/models`.
+1. Copy the new model file into `<repo-root>/models`.
 2. Update any benchmark or runtime commands to reference the new model path when needed.
 3. Re-run health and inference validation:
 
 ```bash
-cd /mnt/e/YOLO
+cd <repo-root>
 uv run --python 3.11 python src/scripts/check_yolo.py
 uv run --python 3.11 python src/scripts/validate.py
 ```
@@ -51,7 +51,7 @@ Application logs default to `logs/app.log` when file logging is enabled.
 Inspect logs:
 
 ```bash
-cd /mnt/e/YOLO
+cd <repo-root>
 tail -f logs/app.log
 ```
 
@@ -80,14 +80,14 @@ docker compose ps
 Inference benchmark:
 
 ```bash
-cd /mnt/e/YOLO
+cd <repo-root>
 uv run --python 3.11 python benchmarks/benchmark_inference.py --model models/yolo11n.pt
 ```
 
 Tracking benchmark:
 
 ```bash
-cd /mnt/e/YOLO
+cd <repo-root>
 uv run --python 3.11 python benchmarks/benchmark_tracking.py --model models/yolo11n.pt
 ```
 
